@@ -2,17 +2,39 @@
 
 ## Intro
 
-The Bonsai App visualizer plugin API is intended to allow you to create custom visualizations of your simulation state and action space. These visualizations can be loaded into the Bonsai App when displaying episode data, making it easier to understand.
+The Bonsai App visualizer plugin API is intended to allow you to create
+custom visualizations of your simulation state and action space. These
+visualizations can be loaded into the Bonsai App when displaying episode
+data, making it easier to understand.
 
-The Bonsai App will send updated state that follows the user’s cursor when they hover over chart data.
+The Bonsai App will send updated state that follows the user’s cursor
+when they hover over chart data.
 
 ## Overview
 
-Plugins are URLs to a JavaScript web application hosted somewhere that the user’s browser can access. These URLs are loaded into an IFrame by the Bonsai App. You will need to provide your own hosting for your plugins.
+Plugins are URLs to a JavaScript web application hosted somewhere that
+the user’s browser can access. These URLs are loaded into an IFrame by
+the Bonsai App. You will need to provide your own hosting for your
+plugins.
 
-You can use pure JavaScript, or a web framework like React or Angular. We use the Window.postMessage() API to communicate with the plugin in the IFrame.
+You can use pure JavaScript, or a web framework like React or Angular.
+We use the Window.postMessage() API to communicate with the plugin in
+the IFrame.
 
-The plugin will also be passed a variety of query parameters when it is loaded. Some of them are reserved by the plugin API, but a developer can have the user pass in additional configuration parameters as necessary.
+The plugin will also be passed a variety of query parameters when it is
+loaded. Some of them are reserved by the plugin API, but a developer can
+have the user pass in additional configuration parameters as necessary.
+
+## Connecting Inkling to the Visualizer
+
+Enable the visualizer in Inkling with the following line:
+
+```
+const SimulatorVisualizer = "https://microsoft.github.io/bonsai-viz-example/cartpole"
+```
+
+Use one of `cartpole`, `simpletank`, `plasticsextruder` in the path
+above.
 
 We have the following examples in this repo:
 
