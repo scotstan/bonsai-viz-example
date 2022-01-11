@@ -25,8 +25,6 @@
   --footerHeight: 100px;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
-
 .coral {
   background-color: var(--coral);
   border: 1px solid var(--coral--b);
