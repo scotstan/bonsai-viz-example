@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bonsai Debug Visualizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        @import url('./reset.css');
+        @import url('./styles.css');
+    </style>
+
+    <script language="JavaScript">
+
+      var stub = {
+            "version": "1.0.0",
+            "type": "IterationUpdate",
+            "meta": {
+                "episode": 0,
+                "iteration": 0,
+                "reward": 1.19436295779605
+            },
+            "state": {
+                "Cr": 8.501710930166611,
+                "Cref": 8.57,
+                "Tc": 297.76814223747255,
+                "Tr": 312.0794300035374,
+                "Tref": 311.2611740324018
+            },
+            "action": {
+                "Tc_adjust": -1.57921302318573
+            }
+      }
+
+      function sigfigs(key, val) {
+          return val.toFixed ? Number(val.toFixed(3)) : val;
+       }
+
+      var Gauge = window.Gauge;
+      function setup() 
+      {
+        const out = document.getElementById("out");
+        out.textContent = JSON.stringify(stub, sigfigs, 2);
+        console.log(stub)
+
+        var g = Gauge(document.getElementById("g1"), {
+            max: 100,
+            label: function(value) {
+                return Math.round(value);
+            },
+            value: 50,
+            // Custom dial colors (Optional)
+            color: function(value) {
+                if(value < 20) {
+                    return "#5ee432"; // green
+                }else if(value < 40) {
+                    return "#fffa50"; // yellow
+                }else if(value < 60) {
+                    return "#f7aa38"; // orange
+                }else {
+                    return "#ef4655"; // red
+                }
+            }
+        });
+        g.setValue(75);
+        g.setValueAnimated(90, 1);
+      }
+
+      // update the visualization from state and action data
+      function update(data) {
+        // convert message to formatted JSON text for display
+        const str = JSON.stringify(data, sigfigs, 2);
+        const out = document.getElementById("out");
+        out.textContent = str;
+      }
+
+      function init() {
+        // on load
+        window.addEventListener("load", () => {
+          setup();
+        });
+
+        // on message
+        window.addEventListener(
+          "message",
+          (event) => {
+            const data = JSON.parse(event.data);
+            update(data);
+          },
+          false
+        );
+      }
+    </script>
+    <script src="gauge.js"></script>
+
+  </head>
+  <body>
+    <section class="container blue" >
+        <div class="box coral ">
+            <pre><code id="out">waiting</code></pre>
+        </div>
+        <div class="box pink text">
+            432ºF
+        </div>
+        <div id="g1" class="gauge-container">
+            <span class="label">Tc</span>
+        </div>
+    </section>
+
+    <script language="JavaScript">
+      init();
+    </script>
+  </body>
+</html>
