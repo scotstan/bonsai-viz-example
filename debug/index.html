@@ -1,5 +1,10 @@
-<html>
+<!doctype html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <title>Bonsai Debug Visualizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script language="JavaScript">
 
       function setup() {
@@ -7,10 +12,14 @@
         out.textContent = "Waiting...";
       }
 
+      function sigfigs(key, val) {
+          return val.toFixed ? Number(val.toFixed(3)) : val;
+      }
+
       // update the visualization from state and action data
       function update(data) {
         // convert message to formatted JSON text for display
-        const str = JSON.stringify(data, null, 2);
+        const str = JSON.stringify(data, sigfigs, 2);
         const out = document.getElementById("out");
         out.textContent = str;
       }

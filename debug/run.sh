@@ -1,2 +1,3 @@
-npm install -g http-server
-npx http-server & open "http://localhost:8080/"
+#!/usr/bin/env bash
+npm install -g reload
+npx reload -b -v
