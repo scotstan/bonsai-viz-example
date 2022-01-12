@@ -9,7 +9,6 @@
 
       function setup() {
         const out = document.getElementById("out");
-        out.textContent = "Waiting...";
       }
 
       function sigfigs(key, val) {
@@ -41,12 +40,18 @@
         );
       }
     </script>
+
+    <style>
+        pre { 
+            font-size: small; 
+            font-family monospace, monospace; 
+            display: box; 
+        } 
+    </style>
+
   </head>
   <body>
-    <pre
-      id="out"
-      style="font-size: small; display: box; position: absolute"
-    ></pre>
+    <pre id="out">Waiting for data...</pre>
     <script language="JavaScript">
       init();
     </script>
